@@ -11,22 +11,24 @@
     :root {
       --blue: #0f2d6b;
       --blue-faint: #e0e6f0;
+      --text: clamp(1rem, 3.5vw, 1.15rem);
     }
 
     body {
       background: #fff;
       font-family: 'DM Sans', sans-serif;
       color: var(--blue);
+    }
+
+    /* ── HERO ── */
+    .hero {
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 3rem 1.5rem;
-      gap: 3rem;
     }
 
-    /* Štýl 1 – hlavný nadpis */
     h1 {
       font-weight: 200;
       font-size: clamp(2.6rem, 16vw, 7.5rem);
@@ -37,30 +39,48 @@
       animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
     }
 
-    .foto {
-      width: 100%;
-      max-width: 680px;
-      aspect-ratio: 3 / 2;
-      object-fit: cover;
+    /* ── FOTO ── */
+    .foto-wrap {
       opacity: 0;
       animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
     }
 
-    .terminy {
+    .foto-wrap img {
       width: 100%;
+      display: block;
+      max-height: 70vh;
+      object-fit: cover;
+    }
+
+    /* ── SEKCIE ── */
+    section {
       max-width: 680px;
-      opacity: 0;
-      animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+      border-top: 1px solid var(--blue-faint);
     }
 
-    /* Štýl 2 – sekcia nadpis */
-    .terminy h2 {
+    .sekcia-nadpis {
       font-weight: 200;
-      font-size: clamp(1rem, 3.5vw, 1.15rem);
-      margin-bottom: 1.2rem;
-      opacity: 0.5;
+      font-size: clamp(1.3rem, 5vw, 1.7rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
     }
 
+    .text-normal {
+      font-weight: 300;
+      font-size: var(--text);
+      line-height: 1.7;
+    }
+
+    .text-soft {
+      font-weight: 200;
+      font-size: var(--text);
+      opacity: 0.5;
+      line-height: 1.7;
+    }
+
+    /* ── TERMÍNY ── */
     .termin {
       display: flex;
       flex-direction: column;
@@ -71,45 +91,22 @@
 
     .termin:last-child { border-bottom: 1px solid var(--blue-faint); }
 
-    /* Štýl 2 – normálny text */
-    .text-normal {
-      font-weight: 300;
-      font-size: clamp(1rem, 3.5vw, 1.15rem);
-    }
-
-    /* Štýl 3 – jemnejší text */
-    .text-soft {
-      font-weight: 200;
-      font-size: clamp(1rem, 3.5vw, 1.15rem);
-      opacity: 0.5;
-    }
-
     .btn {
       display: inline-block;
       margin-top: 0.4rem;
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: clamp(1rem, 3.5vw, 1.15rem);
+      font-size: var(--text);
       color: var(--blue);
       border: 1px solid var(--blue);
       padding: 0.4rem 1rem;
       text-decoration: none;
-      align-self: flex-start;
       transition: background 0.2s, color 0.2s;
     }
 
     .btn:hover { background: var(--blue); color: #fff; }
 
-    .info {
-      text-align: center;
-      opacity: 0;
-      animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 1s;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      align-items: center;
-    }
-
+    /* ── KONTAKT ── */
     .mail {
       text-decoration: none;
       color: var(--blue);
@@ -126,18 +123,36 @@
   </style>
 </head>
 <body>
-  <h1>Vnímavé<br>prechádzky</h1>
-  <img class="foto" src="foto.jpg" alt="Vnímavé prechádzky" />
 
-  <div class="terminy">
-    <h2>Najbližšie prechádzky</h2>
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Vnímavé<br>prechádzky</h1>
+  </div>
+
+  <!-- FOTO -->
+  <div class="foto-wrap">
+    <img src="foto.jpg" alt="Vnímavé prechádzky" />
+  </div>
+
+  <!-- O PROJEKTE -->
+  <section>
+    <h2 class="sekcia-nadpis">Čo sú Vnímavé prechádzky?</h2>
+    <p class="text-normal">Vnímavé prechádzky sú zážitkami, ktoré vás zmenia.</p>
+    <br>
+    <p class="text-normal">Trenčín ukazujeme z nových uhlov, ktoré si bežný človek vie len ťažko predstaviť. Pohľad ľudí v núdzi zažijete počas Prechádzky bez domova a úplne nové vnímanie pohybu po meste získate na Prechádzke na vozíku. Ste pripravení?</p>
+  </section>
+
+  <!-- TERMÍNY -->
+  <section>
+    <h2 class="sekcia-nadpis">Najbližšie prechádzky</h2>
     <div id="zoznam"><p class="text-soft">Načítavam termíny...</p></div>
-  </div>
+  </section>
 
-  <div class="info">
-    <p class="text-normal">Ukážeme vám Trenčín inými očami. Chcete sa pridať?</p>
-    <a class="text-normal mail" href="mailto:bebjakova.jana@gmail.com">bebjakova.jana@gmail.com</a>
-  </div>
+  <!-- KONTAKT -->
+  <section>
+    <h2 class="sekcia-nadpis">Kontakt</h2>
+    <p class="text-normal"><a class="mail" href="mailto:bebjakova.jana@gmail.com">bebjakova.jana@gmail.com</a></p>
+  </section>
 
   <script>
     const SHEET_ID = '1aN3vDM2wXE2JcnCTUgYs1JwXSEE29CM7W-ZmALNQsE0';
@@ -194,5 +209,6 @@
         document.getElementById('zoznam').innerHTML = '<p class="text-soft">Termíny sa nepodarilo načítať.</p>';
       });
   </script>
+
 </body>
 </html>
