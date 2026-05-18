@@ -4,21 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vnímavé prechádzky</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200;9..40,300&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #0f2d6b;
+      --blue-faint: #e0e6f0;
+      --font-lg: clamp(1.05rem, 3.5vw, 1.2rem);
+      --font-md: clamp(0.95rem, 3vw, 1.05rem);
+      --font-sm: clamp(0.9rem, 2.8vw, 1rem);
+    }
 
     body {
       background: #fff;
       font-family: 'DM Sans', sans-serif;
-      color: #0f2d6b;
+      font-weight: 300;
+      color: var(--blue);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 3rem 1.5rem;
-      gap: 2.5rem;
+      gap: 3rem;
     }
 
     h1 {
@@ -40,57 +49,67 @@
       animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
     }
 
+    /* Termíny */
     .terminy {
       width: 100%;
       max-width: 680px;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
       opacity: 0;
       animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s;
     }
 
     .terminy h2 {
       font-weight: 200;
-      font-size: clamp(1.1rem, 4vw, 1.4rem);
-      letter-spacing: -0.01em;
-      margin-bottom: 1rem;
+      font-size: var(--font-lg);
+      margin-bottom: 1.2rem;
     }
 
     .termin {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 0.2rem 1rem;
-      padding: 1rem 0;
-      border-top: 1px solid #e0e6f0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1.2rem 0;
+      border-top: 1px solid var(--blue-faint);
     }
 
-    .termin:last-child { border-bottom: 1px solid #e0e6f0; }
+    .termin:last-child {
+      border-bottom: 1px solid var(--blue-faint);
+    }
 
     .termin-nazov {
+      font-size: var(--font-md);
       font-weight: 300;
-      font-size: clamp(0.95rem, 3vw, 1.05rem);
-      grid-column: 1; grid-row: 1;
     }
 
-    .termin-datum {
+    .termin-meta {
+      font-size: var(--font-sm);
       font-weight: 200;
-      font-size: clamp(0.8rem, 2.5vw, 0.9rem);
-      grid-column: 1; grid-row: 2;
       opacity: 0.7;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem 1rem;
     }
 
-    .termin-miesto {
-      font-weight: 200;
-      font-size: clamp(0.8rem, 2.5vw, 0.9rem);
-      grid-column: 2; grid-row: 1 / 3;
-      text-align: right;
-      align-self: center;
-      opacity: 0.7;
-      line-height: 1.4;
+    .btn {
+      display: inline-block;
+      margin-top: 0.4rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: var(--font-sm);
+      color: var(--blue);
+      border: 1px solid var(--blue);
+      padding: 0.45rem 1.1rem;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      align-self: flex-start;
+      transition: background 0.2s, color 0.2s;
     }
 
+    .btn:hover {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    /* Kontakt */
     .info {
       text-align: center;
       opacity: 0;
@@ -101,25 +120,29 @@
     }
 
     .veta {
+      font-size: var(--font-md);
       font-weight: 300;
-      font-size: clamp(0.95rem, 3vw, 1.1rem);
       line-height: 1.6;
       max-width: 38ch;
     }
 
     .mail {
+      font-size: var(--font-sm);
       font-weight: 200;
-      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
-      letter-spacing: 0.02em;
       text-decoration: none;
-      color: #0f2d6b;
-      border-bottom: 1px solid #0f2d6b;
+      color: var(--blue);
+      border-bottom: 1px solid var(--blue);
       padding-bottom: 1px;
       align-self: center;
     }
 
     .mail:hover { opacity: 0.6; }
-    .nacitavam { font-weight: 200; font-size: 0.9rem; opacity: 0.5; }
+
+    .nacitavam {
+      font-size: var(--font-sm);
+      font-weight: 200;
+      opacity: 0.5;
+    }
 
     @keyframes appear {
       from { opacity: 0; transform: translateY(12px); }
@@ -147,7 +170,6 @@
 
     function formatDate(val) {
       if (!val) return '';
-      // Google Sheets date comes as "Date(yyyy,m,d)"
       const match = String(val).match(/Date\((\d+),(\d+),(\d+)/);
       if (match) {
         const d = new Date(+match[1], +match[2], +match[3]);
@@ -158,7 +180,6 @@
 
     function formatTime(val) {
       if (!val) return '';
-      // Google Sheets time comes as "Date(1899,11,30,h,m,s)"
       const match = String(val).match(/Date\(\d+,\d+,\d+,(\d+),(\d+)/);
       if (match) {
         const h = String(+match[1]).padStart(2, '0');
@@ -185,11 +206,15 @@
           const time = formatTime(row.c[1]?.v);
           const name = row.c[2]?.v || '';
           const start = row.c[3]?.v || '';
+          const form = row.c[4]?.v || '';
           return `
             <div class="termin">
               <div class="termin-nazov">${name}</div>
-              <div class="termin-datum">${date}${time ? ', ' + time : ''}</div>
-              <div class="termin-miesto">${start}</div>
+              <div class="termin-meta">
+                <span>${date}${time ? ', ' + time : ''}</span>
+                ${start ? `<span>${start}</span>` : ''}
+              </div>
+              ${form ? `<a class="btn" href="${form}" target="_blank">Registrovať</a>` : ''}
             </div>`;
         }).join('');
       })
