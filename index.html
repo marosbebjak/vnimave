@@ -11,15 +11,11 @@
     :root {
       --blue: #0f2d6b;
       --blue-faint: #e0e6f0;
-      --font-lg: clamp(1.05rem, 3.5vw, 1.2rem);
-      --font-md: clamp(0.95rem, 3vw, 1.05rem);
-      --font-sm: clamp(0.9rem, 2.8vw, 1rem);
     }
 
     body {
       background: #fff;
       font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
       color: var(--blue);
       min-height: 100vh;
       display: flex;
@@ -30,6 +26,7 @@
       gap: 3rem;
     }
 
+    /* Štýl 1 – hlavný nadpis */
     h1 {
       font-weight: 200;
       font-size: clamp(2.6rem, 16vw, 7.5rem);
@@ -49,7 +46,6 @@
       animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
     }
 
-    /* Termíny */
     .terminy {
       width: 100%;
       max-width: 680px;
@@ -57,36 +53,35 @@
       animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s;
     }
 
+    /* Štýl 2 – sekcia nadpis */
     .terminy h2 {
       font-weight: 200;
-      font-size: var(--font-lg);
+      font-size: clamp(1rem, 3.5vw, 1.15rem);
       margin-bottom: 1.2rem;
+      opacity: 0.5;
     }
 
     .termin {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.4rem;
       padding: 1.2rem 0;
       border-top: 1px solid var(--blue-faint);
     }
 
-    .termin:last-child {
-      border-bottom: 1px solid var(--blue-faint);
-    }
+    .termin:last-child { border-bottom: 1px solid var(--blue-faint); }
 
-    .termin-nazov {
-      font-size: var(--font-md);
+    /* Štýl 2 – normálny text */
+    .text-normal {
       font-weight: 300;
+      font-size: clamp(1rem, 3.5vw, 1.15rem);
     }
 
-    .termin-meta {
-      font-size: var(--font-sm);
+    /* Štýl 3 – jemnejší text */
+    .text-soft {
       font-weight: 200;
-      opacity: 0.7;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem 1rem;
+      font-size: clamp(1rem, 3.5vw, 1.15rem);
+      opacity: 0.5;
     }
 
     .btn {
@@ -94,55 +89,35 @@
       margin-top: 0.4rem;
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: var(--font-sm);
+      font-size: clamp(1rem, 3.5vw, 1.15rem);
       color: var(--blue);
       border: 1px solid var(--blue);
-      padding: 0.45rem 1.1rem;
+      padding: 0.4rem 1rem;
       text-decoration: none;
-      letter-spacing: 0.03em;
       align-self: flex-start;
       transition: background 0.2s, color 0.2s;
     }
 
-    .btn:hover {
-      background: var(--blue);
-      color: #fff;
-    }
+    .btn:hover { background: var(--blue); color: #fff; }
 
-    /* Kontakt */
     .info {
       text-align: center;
       opacity: 0;
       animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 1s;
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
-    }
-
-    .veta {
-      font-size: var(--font-md);
-      font-weight: 300;
-      line-height: 1.6;
-      max-width: 38ch;
+      gap: 0.6rem;
+      align-items: center;
     }
 
     .mail {
-      font-size: var(--font-sm);
-      font-weight: 200;
       text-decoration: none;
       color: var(--blue);
       border-bottom: 1px solid var(--blue);
       padding-bottom: 1px;
-      align-self: center;
     }
 
     .mail:hover { opacity: 0.6; }
-
-    .nacitavam {
-      font-size: var(--font-sm);
-      font-weight: 200;
-      opacity: 0.5;
-    }
 
     @keyframes appear {
       from { opacity: 0; transform: translateY(12px); }
@@ -156,12 +131,12 @@
 
   <div class="terminy">
     <h2>Najbližšie prechádzky</h2>
-    <div id="zoznam"><p class="nacitavam">Načítavam termíny...</p></div>
+    <div id="zoznam"><p class="text-soft">Načítavam termíny...</p></div>
   </div>
 
   <div class="info">
-    <p class="veta">Ukážeme vám Trenčín inými očami. Chcete sa pridať?</p>
-    <a class="mail" href="mailto:bebjakova.jana@gmail.com">bebjakova.jana@gmail.com</a>
+    <p class="text-normal">Ukážeme vám Trenčín inými očami. Chcete sa pridať?</p>
+    <a class="text-normal mail" href="mailto:bebjakova.jana@gmail.com">bebjakova.jana@gmail.com</a>
   </div>
 
   <script>
@@ -197,7 +172,7 @@
         const zoznam = document.getElementById('zoznam');
 
         if (!rows || rows.length === 0) {
-          zoznam.innerHTML = '<p class="nacitavam">Žiadne termíny</p>';
+          zoznam.innerHTML = '<p class="text-soft">Žiadne termíny</p>';
           return;
         }
 
@@ -209,17 +184,14 @@
           const form = row.c[4]?.v || '';
           return `
             <div class="termin">
-              <div class="termin-nazov">${name}</div>
-              <div class="termin-meta">
-                <span>${date}${time ? ', ' + time : ''}</span>
-                ${start ? `<span>${start}</span>` : ''}
-              </div>
+              <div class="text-normal">${name}</div>
+              <div class="text-soft">${date}${time ? ', ' + time : ''}${start ? ' · ' + start : ''}</div>
               ${form ? `<a class="btn" href="${form}" target="_blank">Registrovať</a>` : ''}
             </div>`;
         }).join('');
       })
       .catch(() => {
-        document.getElementById('zoznam').innerHTML = '<p class="nacitavam">Termíny sa nepodarilo načítať.</p>';
+        document.getElementById('zoznam').innerHTML = '<p class="text-soft">Termíny sa nepodarilo načítať.</p>';
       });
   </script>
 </body>
