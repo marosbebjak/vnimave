@@ -13,135 +13,143 @@
       --fg: #f0ede6;
       --muted: rgba(240,237,230,0.55);
       --rule: rgba(240,237,230,0.15);
-      --text: clamp(1.05rem, 3.5vw, 1.2rem);
-      --pad: clamp(1.25rem, 5vw, 3rem);
+      --text: clamp(1rem, 3.5vw, 1.15rem);
     }
 
-    html, body {
+    body {
       background: var(--bg);
-      color: var(--fg);
       font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
+      color: var(--fg);
     }
 
-    .wrap {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .inner {
-      padding-left: var(--pad);
-      padding-right: var(--pad);
-    }
-
-    header {
-      padding-top: 3rem;
-      padding-bottom: 2.5rem;
-      opacity: 0;
-      animation: up 1s cubic-bezier(0.16,1,0.3,1) forwards 0.1s;
+    /* ── HERO ── */
+    .hero {
+      padding: 4rem 1.5rem 3rem;
     }
 
     h1 {
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
       font-size: clamp(3.2rem, 14vw, 9rem);
-      line-height: 0.9;
       letter-spacing: -0.03em;
+      line-height: 0.9;
+      opacity: 0;
+      animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
       color: var(--fg);
     }
 
+    /* ── FOTO ── */
     .foto-wrap {
       opacity: 0;
-      animation: up 1s cubic-bezier(0.16,1,0.3,1) forwards 0.3s;
+      animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
     }
 
     .foto-wrap img {
       width: 100%;
       display: block;
-      max-height: 65vh;
+      max-height: 70vh;
       object-fit: cover;
       object-position: center 60%;
       filter: grayscale(100%) contrast(1.05);
       mix-blend-mode: luminosity;
     }
 
+    /* ── SEKCIE ── */
     section {
-      padding-top: calc(var(--pad) * 1.2);
-      padding-bottom: calc(var(--pad) * 1.2);
-      opacity: 0;
-      animation: up 1s cubic-bezier(0.16,1,0.3,1) forwards 0.5s;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem;
     }
-
-    section:nth-child(3) { animation-delay: 0.65s; }
-    section:nth-child(4) { animation-delay: 0.8s; }
 
     .label {
-      font-size: 0.7rem; font-weight: 400;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 1.2rem;
+      font-weight: 300;
+      font-size: clamp(1.1rem, 4vw, 1.3rem);
+      letter-spacing: -0.01em;
+      margin-bottom: 1.2rem;
+      color: var(--fg);
     }
 
-    .text { font-size: var(--text); font-weight: 300; line-height: 1.7; color: var(--fg); }
+    .text {
+      font-weight: 300;
+      font-size: var(--text);
+      line-height: 1.7;
+      color: var(--fg);
+    }
+
     .text + .text { margin-top: 1em; }
-    .text.muted { color: var(--muted); }
 
-    .termin {
-      padding: 1.1rem 0;
-      border-bottom: 1px solid var(--rule);
-      display: flex; flex-direction: column; gap: 0.3rem;
+    .text.muted {
+      opacity: 0.65;
+      color: var(--fg);
     }
-    .termin:first-child { border-top: 1px solid var(--rule); }
+
+    /* ── TERMÍNY ── */
+    .termin {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding: 1.2rem 0;
+      border-top: 1px solid var(--rule);
+    }
+
+    .termin:last-child { border-bottom: 1px solid var(--rule); }
 
     .btn {
-      display: inline-block; margin-top: 0.6rem;
+      display: inline-block;
+      margin-top: 0.4rem;
       font-family: 'DM Sans', sans-serif;
-      font-size: var(--text); font-weight: 300;
-      color: var(--fg); border: 1px solid rgba(240,237,230,0.5);
-      padding: 0.4rem 1rem; text-decoration: none;
-      transition: background 0.18s, border-color 0.18s;
+      font-weight: 300;
+      font-size: var(--text);
+      color: var(--fg);
+      border: 1px solid rgba(240,237,230,0.5);
+      padding: 0.4rem 1rem;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
     }
+
     .btn:hover { background: rgba(240,237,230,0.1); border-color: var(--fg); }
 
+    /* ── KONTAKT ── */
     .mail {
-      color: var(--fg); text-decoration: none;
-      border-bottom: 1px solid rgba(240,237,230,0.5); padding-bottom: 2px;
+      text-decoration: none;
+      color: var(--fg);
+      border-bottom: 1px solid rgba(240,237,230,0.5);
+      padding-bottom: 1px;
     }
-    .mail:hover { border-color: var(--fg); }
 
-    @keyframes up {
-      from { opacity: 0; transform: translateY(14px); }
+    .mail:hover { opacity: 0.6; }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header class="inner">
+  <div class="hero">
     <h1>Vnímavé prechádzky</h1>
-  </header>
+  </div>
 
   <div class="foto-wrap">
     <img src="foto.jpg" alt="Vnímavé prechádzky" />
   </div>
 
-  <section class="inner">
-    <p class="label">O projekte</p>
+  <section>
+    <h2 class="label">O projekte</h2>
     <p class="text">Vnímavé prechádzky otvárajú ľuďom oči.</p>
     <p class="text">Mesto ukazujeme z nových uhlov, ktoré si bežný človek vie len ťažko predstaviť. Pohľad ľudí v núdzi spoznáte počas Prechádzky bez domova a úplne nové vnímanie pohybu po meste získate na Prechádzke na vozíku. Príďte to zažiť.</p>
   </section>
 
-  <section class="inner">
-    <p class="label">Najbližšie prechádzky</p>
+  <section>
+    <h2 class="label">Najbližšie prechádzky</h2>
     <div id="zoznam"><p class="text muted">Načítavam termíny...</p></div>
   </section>
 
-  <section class="inner">
-    <p class="label">Ozvite sa nám</p>
+  <section>
+    <h2 class="label">Ozvite sa nám</h2>
     <p class="text"><a class="mail" href="mailto:bebjakova.jana@gmail.com">bebjakova.jana@gmail.com</a></p>
   </section>
-
-</div>
 
   <script>
     const SHEET_ID = '1aN3vDM2wXE2JcnCTUgYs1JwXSEE29CM7W-ZmALNQsE0';
@@ -174,10 +182,12 @@
         const json = JSON.parse(text.substring(47, text.length - 2));
         const rows = json.table.rows;
         const zoznam = document.getElementById('zoznam');
+
         if (!rows || rows.length === 0) {
           zoznam.innerHTML = '<p class="text muted">Žiadne termíny</p>';
           return;
         }
+
         zoznam.innerHTML = rows.map(row => {
           const date = formatDate(row.c[0]?.v);
           const time = formatTime(row.c[1]?.v);
