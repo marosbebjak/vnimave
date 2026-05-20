@@ -4,147 +4,140 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vnímavé prechádzky</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200;9..40,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=DM+Sans:opsz,wght@9..40,200;9..40,300&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --blue: #0f2d6b;
-      --blue-faint: #e0e6f0;
-      --text: clamp(1rem, 3.5vw, 1.15rem);
+      --bg: #005545;
+      --fg: #f0ede6;
+      --muted: rgba(240,237,230,0.45);
+      --rule: rgba(240,237,230,0.15);
+      --text: clamp(0.95rem, 3vw, 1.05rem);
     }
 
-    body {
-      background: #fff;
-      font-family: 'DM Sans', sans-serif;
-      color: var(--blue);
-    }
+    html, body { background: var(--bg); color: var(--fg); font-family: 'DM Sans', sans-serif; font-weight: 300; }
 
-    /* ── HERO ── */
-    .hero {
-      padding: 4rem 1.5rem 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    body { max-width: 720px; margin: 0 auto; padding: 0 1.5rem; }
+
+    header {
+      padding: 3rem 0 2.5rem;
+      opacity: 0;
+      animation: up 1s cubic-bezier(0.16,1,0.3,1) forwards 0.1s;
     }
 
     h1 {
-      font-weight: 200;
-      font-size: clamp(2.6rem, 16vw, 7.5rem);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(3.2rem, 17vw, 8rem);
+      line-height: 0.9;
       letter-spacing: -0.03em;
-      line-height: 1;
-      text-align: center;
-      opacity: 0;
-      animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
+      color: var(--fg);
     }
 
-    /* ── FOTO ── */
     .foto-wrap {
+      margin: 0 -1.5rem;
       opacity: 0;
-      animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
+      animation: up 1s cubic-bezier(0.16,1,0.3,1) forwards 0.3s;
     }
 
     .foto-wrap img {
       width: 100%;
       display: block;
-      max-height: 70vh;
+      max-height: 60vh;
       object-fit: cover;
+      filter: grayscale(100%) contrast(1.05);
+      mix-blend-mode: luminosity;
     }
 
-    /* ── SEKCIE ── */
     section {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 3.5rem 1.5rem;
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--rule);
+      opacity: 0;
+      animation: up 1s cubic-bezier(0.16,1,0.3,1) forwards 0.5s;
     }
 
-    .sekcia-nadpis {
-      font-weight: 300;
-      font-size: clamp(1.1rem, 4vw, 1.3rem);
-      letter-spacing: -0.01em;
+    section:nth-child(4) { animation-delay: 0.65s; }
+    section:nth-child(5) { animation-delay: 0.8s; }
+
+    .label {
+      font-size: 0.68rem;
+      font-weight: 200;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
       margin-bottom: 1.2rem;
     }
 
-    .text-normal {
-      font-weight: 200;
-      font-size: var(--text);
-      line-height: 1.7;
-    }
+    .text { font-size: var(--text); font-weight: 300; line-height: 1.7; color: var(--fg); }
+    .text.muted { color: var(--muted); }
 
-    .text-soft {
-      font-weight: 200;
-      font-size: var(--text);
-      opacity: 0.65;
-      line-height: 1.7;
-    }
-
-    /* ── TERMÍNY ── */
     .termin {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--rule);
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
-      padding: 1.2rem 0;
-      border-top: 1px solid var(--blue-faint);
+      gap: 0.3rem;
     }
 
-    .termin:last-child { border-bottom: 1px solid var(--blue-faint); }
+    .termin:first-child { border-top: 1px solid var(--rule); }
 
     .btn {
       display: inline-block;
-      margin-top: 0.4rem;
+      margin-top: 0.5rem;
       font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
       font-size: var(--text);
-      color: var(--blue);
-      border: 1px solid var(--blue);
-      padding: 0.4rem 1rem;
+      font-weight: 300;
+      color: var(--fg);
+      border: 1px solid rgba(240,237,230,0.4);
+      padding: 0.35rem 0.9rem;
       text-decoration: none;
-      transition: background 0.2s, color 0.2s;
+      align-self: flex-start;
+      transition: background 0.18s, border-color 0.18s;
     }
 
-    .btn:hover { background: var(--blue); color: #fff; }
+    .btn:hover { background: rgba(240,237,230,0.1); border-color: var(--fg); }
 
-    /* ── KONTAKT ── */
     .mail {
+      color: var(--fg);
       text-decoration: none;
-      color: var(--blue);
-      border-bottom: 1px solid var(--blue);
+      border-bottom: 1px solid rgba(240,237,230,0.4);
       padding-bottom: 1px;
     }
 
-    .mail:hover { opacity: 0.6; }
+    .mail:hover { border-color: var(--fg); }
 
-    @keyframes appear {
-      from { opacity: 0; transform: translateY(12px); }
+    @keyframes up {
+      from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
 
-  <div class="hero">
-    <h1>Vnímavé<br>prechádzky</h1>
-  </div>
+  <header>
+    <h1>Vnímavé prechádzky</h1>
+  </header>
 
   <div class="foto-wrap">
     <img src="foto.jpg" alt="Vnímavé prechádzky" />
   </div>
 
   <section>
-    <h2 class="sekcia-nadpis">Čo sú Vnímavé prechádzky?</h2>
-    <p class="text-normal">Vnímavé prechádzky sú zážitkami, ktoré vás zmenia.</p>
+    <p class="label">O projekte</p>
+    <p class="text">Vnímavé prechádzky otvárajú ľuďom oči.</p>
     <br>
-    <p class="text-normal">Trenčín ukazujeme z nových uhlov, ktoré si bežný človek vie len ťažko predstaviť. Pohľad ľudí v núdzi zažijete počas Prechádzky bez domova a úplne nové vnímanie pohybu po meste získate na Prechádzke na vozíku. Ste pripravení?</p>
+    <p class="text">Mesto ukazujeme z nových uhlov, ktoré si bežný človek vie len ťažko predstaviť. Pohľad ľudí v núdzi spoznáte počas Prechádzky bez domova a úplne nové vnímanie pohybu po meste získate na Prechádzke na vozíku. Príďte to zažiť.</p>
   </section>
 
   <section>
-    <h2 class="sekcia-nadpis">Najbližšie prechádzky</h2>
-    <div id="zoznam"><p class="text-soft">Načítavam termíny...</p></div>
+    <p class="label">Najbližšie prechádzky</p>
+    <div id="zoznam"><p class="text muted">Načítavam termíny...</p></div>
   </section>
 
   <section>
-    <h2 class="sekcia-nadpis">Ozvite sa nám</h2>
-    <p class="text-normal"><a class="mail" href="mailto:bebjakova.jana@gmail.com">bebjakova.jana@gmail.com</a></p>
+    <p class="label">Ozvite sa nám</p>
+    <p class="text"><a class="mail" href="mailto:bebjakova.jana@gmail.com">bebjakova.jana@gmail.com</a></p>
   </section>
 
   <script>
@@ -180,7 +173,7 @@
         const zoznam = document.getElementById('zoznam');
 
         if (!rows || rows.length === 0) {
-          zoznam.innerHTML = '<p class="text-soft">Žiadne termíny</p>';
+          zoznam.innerHTML = '<p class="text muted">Žiadne termíny</p>';
           return;
         }
 
@@ -192,14 +185,16 @@
           const form = row.c[4]?.v || '';
           return `
             <div class="termin">
-              <div class="text-normal">${name}</div>
-              <div class="text-soft">${date}${time ? ', ' + time : ''}${start ? ' · ' + start : ''}</div>
-              ${form ? `<a class="btn" href="${form}" target="_blank">Registrovať</a>` : `<span class="text-soft">Registrácia čoskoro</span>`}
+              <div class="text">${name}</div>
+              <div class="text muted">${date}${time ? ', ' + time : ''}${start ? ' · ' + start : ''}</div>
+              ${form
+                ? `<a class="btn" href="${form}" target="_blank">Registrovať</a>`
+                : `<span class="text muted">Registrácia čoskoro</span>`}
             </div>`;
         }).join('');
       })
       .catch(() => {
-        document.getElementById('zoznam').innerHTML = '<p class="text-soft">Termíny sa nepodarilo načítať.</p>';
+        document.getElementById('zoznam').innerHTML = '<p class="text muted">Termíny sa nepodarilo načítať.</p>';
       });
   </script>
 
