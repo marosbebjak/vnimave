@@ -17,10 +17,19 @@
       --pad: clamp(1.25rem, 5vw, 3rem);
     }
 
-    html, body { background: var(--bg); color: var(--fg); font-family: 'DM Sans', sans-serif; font-weight: 300; }
-    body { max-width: 720px; margin: 0 auto; padding: 0 var(--pad); }
+    html, body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+    }
 
-    /* trasa – fixed, nad všetkým */
+    body {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* trasa – v pozadí */
     #trasa-svg {
       position: fixed;
       top: 0; left: 50%;
@@ -28,11 +37,11 @@
       width: min(720px, 100vw);
       height: 100vh;
       pointer-events: none;
-      z-index: 100;
+      z-index: 0;
     }
 
     header {
-      padding: 3rem 0 2.5rem;
+      padding: 3rem var(--pad) 2.5rem;
       opacity: 0;
       animation: up 1s cubic-bezier(0.16,1,0.3,1) forwards 0.1s;
       position: relative; z-index: 1;
@@ -48,22 +57,23 @@
     }
 
     .foto-wrap {
-      margin: 0 calc(-1 * var(--pad));
       opacity: 0;
       animation: up 1s cubic-bezier(0.16,1,0.3,1) forwards 0.3s;
       position: relative; z-index: 1;
     }
 
     .foto-wrap img {
-      width: 100%; display: block;
-      max-height: 65vh; object-fit: cover;
+      width: 100%;
+      display: block;
+      max-height: 65vh;
+      object-fit: cover;
       object-position: center 60%;
       filter: grayscale(100%) contrast(1.05);
       mix-blend-mode: luminosity;
     }
 
     section {
-      padding: calc(var(--pad) * 1.2) 0;
+      padding: calc(var(--pad) * 1.2) var(--pad);
       opacity: 0;
       animation: up 1s cubic-bezier(0.16,1,0.3,1) forwards 0.5s;
       position: relative; z-index: 1;
@@ -114,7 +124,6 @@
 </head>
 <body>
 
-  <!-- trasa – vždy navrchu -->
   <svg id="trasa-svg" viewBox="0 0 200 400" preserveAspectRatio="xMidYMid slice">
     <g id="stopy" opacity="0.5"></g>
   </svg>
@@ -144,7 +153,6 @@
   </section>
 
   <script>
-    // ── TRASA ──
     function rnd(min, max) { return min + Math.random() * (max - min); }
 
     (function() {
@@ -162,8 +170,8 @@
         pts.push({ x: 100 + side * amp + jitter, y: t * H });
       }
 
-      const extStart = { x: pts[0].x, y: pts[0].y - 40 };
-      const extEnd   = { x: pts[pts.length-1].x, y: pts[pts.length-1].y + 40 };
+      const extStart = { x: pts[0].x, y: -40 };
+      const extEnd   = { x: pts[pts.length-1].x, y: H + 40 };
       const allPts   = [extStart, ...pts, extEnd];
 
       function cr2cb(p0, p1, p2, p3, tension = 0.25) {
@@ -204,12 +212,12 @@
         const shape = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         shape.setAttribute('d', 'M-5.5,0 Q0,-2 5.5,0 Q0,2 -5.5,0 Z');
         shape.setAttribute('fill', 'none');
-        shape.setAttribute('stroke', 'rgba(240,237,230,0.85)');
+        shape.setAttribute('stroke', 'rgba(240,237,230,0.7)');
         shape.setAttribute('stroke-width', '1');
 
         const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         dot.setAttribute('cx', '0'); dot.setAttribute('cy', '0');
-        dot.setAttribute('r', '1'); dot.setAttribute('fill', 'rgba(240,237,230,0.85)');
+        dot.setAttribute('r', '1'); dot.setAttribute('fill', 'rgba(240,237,230,0.7)');
 
         eye.appendChild(shape); eye.appendChild(dot);
         g.appendChild(eye);
@@ -218,7 +226,6 @@
       path.remove();
     })();
 
-    // ── TERMÍNY ──
     const SHEET_ID = '1aN3vDM2wXE2JcnCTUgYs1JwXSEE29CM7W-ZmALNQsE0';
     const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
