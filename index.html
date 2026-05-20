@@ -14,56 +14,69 @@
       --muted: rgba(240,237,230,0.55);
       --rule: rgba(240,237,230,0.15);
       --text: clamp(1rem, 3.5vw, 1.15rem);
+      --pad: clamp(1.5rem, 5vw, 4rem);
     }
 
-    body {
+    html, body {
       background: var(--bg);
       font-family: 'DM Sans', sans-serif;
       color: var(--fg);
     }
 
-    /* ── HERO ── */
-    .hero { max-width: 680px; margin: 0 auto;
-      padding: 4rem 1.5rem 3rem;
+    /* Nadpis a sekcie – rovnaký ľavý okraj */
+    header, section {
+      max-width: 680px;
+      padding-left: var(--pad);
+      padding-right: var(--pad);
+    }
+
+    header {
+      padding-top: 3.5rem;
+      padding-bottom: 2.5rem;
+      opacity: 0;
+      animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
     }
 
     h1 {
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
-      font-size: clamp(2.8rem, 8vw, 4.5rem);
+      font-size: clamp(2.8rem, 8vw, 5rem);
       letter-spacing: -0.03em;
-      line-height: 0.9;
-      opacity: 0;
-      animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
+      line-height: 0.95;
       color: var(--fg);
     }
 
-    /* ── FOTO ── */
+    /* Fotka – fullwidth, žiadny padding */
     .foto-wrap {
+      width: 100%;
       opacity: 0;
-      animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
+      animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
     }
 
     .foto-wrap img {
       width: 100%;
       display: block;
-      max-height: 70vh;
+      max-height: 65vh;
       object-fit: cover;
       object-position: center 60%;
       filter: grayscale(100%) contrast(1.05);
       mix-blend-mode: luminosity;
     }
 
-    /* ── SEKCIE ── */
     section {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 3.5rem 1.5rem;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      opacity: 0;
+      animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s;
     }
 
-    .label { font-family: 'Space Grotesk', sans-serif;
-      font-weight: 300;
-      font-size: clamp(1.1rem, 4vw, 1.3rem);
+    section:nth-child(4) { animation-delay: 0.75s; }
+    section:nth-child(5) { animation-delay: 0.9s; }
+
+    .label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.1rem, 3vw, 1.3rem);
       letter-spacing: -0.01em;
       margin-bottom: 1.2rem;
       color: var(--fg);
@@ -77,13 +90,8 @@
     }
 
     .text + .text { margin-top: 1em; }
+    .text.muted { opacity: 0.65; }
 
-    .text.muted {
-      opacity: 0.65;
-      color: var(--fg);
-    }
-
-    /* ── TERMÍNY ── */
     .termin {
       display: flex;
       flex-direction: column;
@@ -91,7 +99,6 @@
       padding: 1.2rem 0;
       border-top: 1px solid var(--rule);
     }
-
     .termin:last-child { border-bottom: 1px solid var(--rule); }
 
     .btn {
@@ -106,17 +113,14 @@
       text-decoration: none;
       transition: background 0.2s, border-color 0.2s;
     }
-
     .btn:hover { background: rgba(240,237,230,0.1); border-color: var(--fg); }
 
-    /* ── KONTAKT ── */
     .mail {
       text-decoration: none;
       color: var(--fg);
       border-bottom: 1px solid rgba(240,237,230,0.5);
       padding-bottom: 1px;
     }
-
     .mail:hover { opacity: 0.6; }
 
     @keyframes appear {
@@ -127,9 +131,9 @@
 </head>
 <body>
 
-  <div class="hero">
+  <header>
     <h1>Vnímavé prechádzky</h1>
-  </div>
+  </header>
 
   <div class="foto-wrap">
     <img src="foto.jpg" alt="Vnímavé prechádzky" />
@@ -182,12 +186,10 @@
         const json = JSON.parse(text.substring(47, text.length - 2));
         const rows = json.table.rows;
         const zoznam = document.getElementById('zoznam');
-
         if (!rows || rows.length === 0) {
           zoznam.innerHTML = '<p class="text muted">Žiadne termíny</p>';
           return;
         }
-
         zoznam.innerHTML = rows.map(row => {
           const date = formatDate(row.c[0]?.v);
           const time = formatTime(row.c[1]?.v);
