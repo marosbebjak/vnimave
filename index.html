@@ -24,27 +24,21 @@
       font-weight: 300;
     }
 
-    body {
+    .wrap {
       max-width: 720px;
       margin: 0 auto;
     }
 
-    /* trasa – v pozadí */
-    #trasa-svg {
-      position: fixed;
-      top: 0; left: 50%;
-      transform: translateX(-50%);
-      width: min(720px, 100vw);
-      height: 100vh;
-      pointer-events: none;
-      z-index: 0;
+    .inner {
+      padding-left: var(--pad);
+      padding-right: var(--pad);
     }
 
     header {
-      padding: 3rem var(--pad) 2.5rem;
+      padding-top: 3rem;
+      padding-bottom: 2.5rem;
       opacity: 0;
       animation: up 1s cubic-bezier(0.16,1,0.3,1) forwards 0.1s;
-      position: relative; z-index: 1;
     }
 
     h1 {
@@ -59,7 +53,6 @@
     .foto-wrap {
       opacity: 0;
       animation: up 1s cubic-bezier(0.16,1,0.3,1) forwards 0.3s;
-      position: relative; z-index: 1;
     }
 
     .foto-wrap img {
@@ -73,14 +66,14 @@
     }
 
     section {
-      padding: calc(var(--pad) * 1.2) var(--pad);
+      padding-top: calc(var(--pad) * 1.2);
+      padding-bottom: calc(var(--pad) * 1.2);
       opacity: 0;
       animation: up 1s cubic-bezier(0.16,1,0.3,1) forwards 0.5s;
-      position: relative; z-index: 1;
     }
 
-    section:nth-child(4) { animation-delay: 0.65s; }
-    section:nth-child(5) { animation-delay: 0.8s; }
+    section:nth-child(3) { animation-delay: 0.65s; }
+    section:nth-child(4) { animation-delay: 0.8s; }
 
     .label {
       font-size: 0.7rem; font-weight: 400;
@@ -105,7 +98,6 @@
       font-size: var(--text); font-weight: 300;
       color: var(--fg); border: 1px solid rgba(240,237,230,0.5);
       padding: 0.4rem 1rem; text-decoration: none;
-      align-self: flex-start;
       transition: background 0.18s, border-color 0.18s;
     }
     .btn:hover { background: rgba(240,237,230,0.1); border-color: var(--fg); }
@@ -123,12 +115,9 @@
   </style>
 </head>
 <body>
+<div class="wrap">
 
-  <svg id="trasa-svg" viewBox="0 0 200 400" preserveAspectRatio="xMidYMid slice">
-    <g id="stopy" opacity="0.5"></g>
-  </svg>
-
-  <header>
+  <header class="inner">
     <h1>Vnímavé prechádzky</h1>
   </header>
 
@@ -136,96 +125,25 @@
     <img src="foto.jpg" alt="Vnímavé prechádzky" />
   </div>
 
-  <section>
+  <section class="inner">
     <p class="label">O projekte</p>
     <p class="text">Vnímavé prechádzky otvárajú ľuďom oči.</p>
     <p class="text">Mesto ukazujeme z nových uhlov, ktoré si bežný človek vie len ťažko predstaviť. Pohľad ľudí v núdzi spoznáte počas Prechádzky bez domova a úplne nové vnímanie pohybu po meste získate na Prechádzke na vozíku. Príďte to zažiť.</p>
   </section>
 
-  <section>
+  <section class="inner">
     <p class="label">Najbližšie prechádzky</p>
     <div id="zoznam"><p class="text muted">Načítavam termíny...</p></div>
   </section>
 
-  <section>
+  <section class="inner">
     <p class="label">Ozvite sa nám</p>
     <p class="text"><a class="mail" href="mailto:bebjakova.jana@gmail.com">bebjakova.jana@gmail.com</a></p>
   </section>
 
+</div>
+
   <script>
-    function rnd(min, max) { return min + Math.random() * (max - min); }
-
-    (function() {
-      const svg = document.getElementById('trasa-svg');
-      const g = document.getElementById('stopy');
-      const W = 200, H = 400;
-      const amp = rnd(35, 55);
-      const numPts = 6;
-      const pts = [];
-
-      for (let i = 0; i < numPts; i++) {
-        const t = i / (numPts - 1);
-        const side = i % 2 === 0 ? 1 : -1;
-        const jitter = rnd(-12, 12);
-        pts.push({ x: 100 + side * amp + jitter, y: t * H });
-      }
-
-      const extStart = { x: pts[0].x, y: -40 };
-      const extEnd   = { x: pts[pts.length-1].x, y: H + 40 };
-      const allPts   = [extStart, ...pts, extEnd];
-
-      function cr2cb(p0, p1, p2, p3, tension = 0.25) {
-        return {
-          cp1: { x: p1.x + (p2.x - p0.x) * tension, y: p1.y + (p2.y - p0.y) * tension },
-          cp2: { x: p2.x - (p3.x - p1.x) * tension, y: p2.y - (p3.y - p1.y) * tension }
-        };
-      }
-
-      let d = `M${allPts[0].x},${allPts[0].y}`;
-      for (let i = 0; i < allPts.length - 1; i++) {
-        const p0 = allPts[Math.max(0, i-1)];
-        const p1 = allPts[i];
-        const p2 = allPts[i+1];
-        const p3 = allPts[Math.min(allPts.length-1, i+2)];
-        const { cp1, cp2 } = cr2cb(p0, p1, p2, p3);
-        d += ` C${cp1.x},${cp1.y} ${cp2.x},${cp2.y} ${p2.x},${p2.y}`;
-      }
-
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      path.setAttribute('d', d);
-      path.setAttribute('fill', 'none');
-      svg.appendChild(path);
-
-      const total = path.getTotalLength();
-      const step  = 13;
-      const count = Math.floor(total / step);
-
-      for (let i = 0; i <= count; i++) {
-        const t   = i * step;
-        const pt  = path.getPointAtLength(t);
-        const pt2 = path.getPointAtLength(Math.min(t + 2, total));
-        const angle = Math.atan2(pt2.y - pt.y, pt2.x - pt.x) * 180 / Math.PI;
-
-        const eye = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        eye.setAttribute('transform', `translate(${pt.x},${pt.y}) rotate(${angle})`);
-
-        const shape = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        shape.setAttribute('d', 'M-5.5,0 Q0,-2 5.5,0 Q0,2 -5.5,0 Z');
-        shape.setAttribute('fill', 'none');
-        shape.setAttribute('stroke', 'rgba(240,237,230,0.7)');
-        shape.setAttribute('stroke-width', '1');
-
-        const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        dot.setAttribute('cx', '0'); dot.setAttribute('cy', '0');
-        dot.setAttribute('r', '1'); dot.setAttribute('fill', 'rgba(240,237,230,0.7)');
-
-        eye.appendChild(shape); eye.appendChild(dot);
-        g.appendChild(eye);
-      }
-
-      path.remove();
-    })();
-
     const SHEET_ID = '1aN3vDM2wXE2JcnCTUgYs1JwXSEE29CM7W-ZmALNQsE0';
     const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
