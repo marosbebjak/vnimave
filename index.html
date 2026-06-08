@@ -340,6 +340,31 @@
       filter: grayscale(100%);
     }
 
+    .partner {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+      border-top: 1px solid var(--fg-faint);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      align-items: flex-start;
+    }
+
+    .partner img {
+      height: 60px;
+      width: auto;
+      opacity: 0.7;
+    }
+
+    .partner p {
+      font-weight: 200;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      line-height: 1.6;
+      opacity: 0.6;
+      color: var(--fg);
+    }
+
     @keyframes appear {
       from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -439,6 +464,13 @@
       </div>
     </div>
   </section>
+
+  <div class="partner">
+    <img src="tn2026.png" alt="Trenčín 2026 – Európske hlavné mesto kultúry" />
+    <p>Vnímavé prechádzky prebiehajú aj vďaka podpore projektu Európske hlavné mesto kultúry Trenčín 2026.</p>
+  </div>
+
+
 
   <script>
     const SHEET_ID = '1aN3vDM2wXE2JcnCTUgYs1JwXSEE29CM7W-ZmALNQsE0';
