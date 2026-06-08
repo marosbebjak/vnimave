@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ďakujeme | Vnímavé prechádzky</title>
+  <meta name="robots" content="noindex" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=DM+Sans:opsz,wght@9..40,200;9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #005545;
+      --fg: #f0ede6;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background: var(--bg);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+    }
+
+    .obsah {
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      opacity: 0;
+      animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 8vw, 3.5rem);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--fg);
+    }
+
+    p {
+      font-weight: 300;
+      font-size: clamp(1rem, 3.5vw, 1.15rem);
+      line-height: 1.7;
+      color: var(--fg);
+      opacity: 0.75;
+    }
+
+    .btn {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1rem, 3.5vw, 1.15rem);
+      color: var(--fg);
+      border: 1px solid rgba(240,237,230,0.5);
+      padding: 0.5rem 1.2rem;
+      text-decoration: none;
+      align-self: flex-start;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn:hover {
+      background: rgba(240,237,230,0.1);
+      border-color: var(--fg);
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="obsah">
+    <h1>Ďakujeme za vnímavosť</h1>
+    <p>Keď budeme mať zaujímavé novinky, ozveme sa.</p>
+    <a class="btn" href="/">Späť na stránku</a>
+  </div>
+</body>
+</html>
