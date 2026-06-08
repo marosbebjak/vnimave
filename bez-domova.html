@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prechádzky bez domova | Vnímavé prechádzky</title>
+  <meta name="description" content="Prechádzky bez domova vám priblížia pohľad ľudí v núdzi. Zažite mesto z nových uhlov v Trenčíne." />
+  <meta name="keywords" content="prechádzky bez domova, prechádzka bez domova, Trenčín, vnímavé prechádzky" />
+  <link rel="canonical" href="https://vnimave.sk/bez-domova.html" />
+  <link rel="stylesheet" href="nav.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=DM+Sans:opsz,wght@9..40,200;9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #005545;
+      --fg: #f0ede6;
+      --fg-faint: rgba(240,237,230,0.15);
+      --text: clamp(1rem, 3.5vw, 1.15rem);
+    }
+
+    body {
+      background: var(--bg);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--fg);
+    }
+
+    .hero {
+      padding: 6rem 1.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.6rem, 16vw, 7.5rem);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      text-align: center;
+      color: var(--fg);
+      opacity: 0;
+      animation: appear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
+    }
+
+    section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem;
+    }
+
+    .sekcia-nadpis {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.1rem, 4vw, 1.3rem);
+      letter-spacing: -0.01em;
+      margin-bottom: 1.2rem;
+      color: var(--fg);
+    }
+
+    .text-normal {
+      font-weight: 300;
+      font-size: var(--text);
+      line-height: 1.7;
+      color: var(--fg);
+    }
+
+    .text-soft {
+      font-weight: 200;
+      font-size: var(--text);
+      opacity: 0.65;
+      line-height: 1.7;
+      color: var(--fg);
+    }
+
+    .mail {
+      text-decoration: none;
+      color: var(--fg);
+      border-bottom: 1px solid rgba(240,237,230,0.5);
+      padding-bottom: 1px;
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-menu" id="nav-menu">
+    <a href="/">Domov</a>
+    <a href="/bez-domova.html" class="active">Prechádzky bez domova</a>
+    <a href="/na-voziku.html">Prechádzky na vozíku</a>
+  </div>
+
+  <div class="hero">
+    <h1>Prechádzky<br>bez domova</h1>
+  </div>
+
+  <section>
+    <p class="text-normal">Text o Prechádzke bez domova bude čoskoro.</p>
+  </section>
+
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const menu = document.getElementById('nav-menu');
+    toggle.addEventListener('click', function() {
+      toggle.classList.toggle('open');
+      menu.classList.toggle('open');
+    });
+    menu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', function() {
+        toggle.classList.remove('open');
+        menu.classList.remove('open');
+      });
+    });
+  </script>
+
+</body>
+</html>

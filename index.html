@@ -38,6 +38,7 @@
     "image": "https://vnimave.sk/foto.jpg"
   }
   </script>
+  <link rel="stylesheet" href="nav.css">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=DM+Sans:opsz,wght@9..40,200;9..40,300&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
   <style>
@@ -347,6 +348,19 @@
 </head>
 <body>
 
+  <nav class="nav">
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-menu" id="nav-menu">
+    <a href="/" class="active">Domov</a>
+    <a href="/bez-domova.html">Prechádzky bez domova</a>
+    <a href="/na-voziku.html">Prechádzky na vozíku</a>
+  </div>
+
+
   <div class="hero">
     <h1>Vnímavé<br>prechádzky</h1>
   </div>
@@ -493,6 +507,22 @@
     var AUTOHIDE = Boolean(0);
   </script>
   <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+
+
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const menu = document.getElementById('nav-menu');
+    toggle.addEventListener('click', function() {
+      toggle.classList.toggle('open');
+      menu.classList.toggle('open');
+    });
+    menu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', function() {
+        toggle.classList.remove('open');
+        menu.classList.remove('open');
+      });
+    });
+  </script>
 
 </body>
 </html>
