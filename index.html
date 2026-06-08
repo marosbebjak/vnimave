@@ -323,6 +323,22 @@
     #success-message svg, #error-message svg { display: none !important; }
     .entry__label, .entry__specification { display: none !important; }
 
+    .medailonik {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.2rem;
+    }
+
+    .medailonik-foto {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      filter: grayscale(100%);
+    }
+
     @keyframes appear {
       from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -400,8 +416,14 @@
   </section>
 
   <section>
-    <h2 class="sekcia-nadpis">Napíšte nám</h2>
-    <p class="text-normal"><a class="mail" href="mailto:bebjakova.jana@gmail.com">bebjakova.jana@gmail.com</a></p>
+    <h2 class="sekcia-nadpis">Jana Bebjaková</h2>
+    <div class="medailonik">
+      <img src="jana.png" alt="Jana Bebjaková" class="medailonik-foto" />
+      <div>
+        <p class="text-normal">Volám sa Jana Bebjaková, som manažérka a sprievodkyňa, a Vnímavé prechádzky sú mojou odpoveďou na potrebu robiť zmysluplné veci.</p>
+        <p class="text-normal" style="margin-top:1rem;">Ak sa chcete niečo spýtať alebo pridať, napíšte mi na <a class="mail" href="mailto:bebjakova.jana@gmail.com">bebjakova.jana@gmail.com</a></p>
+      </div>
+    </div>
   </section>
 
   <script>
