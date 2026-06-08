@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Prechádzky bez domova | Vnímavé prechádzky</title>
-  <meta name="description" content="Prechádzky bez domova vám priblížia pohľad ľudí v núdzi. Zažite mesto z nových uhlov v Trenčíne." />
-  <meta name="keywords" content="prechádzky bez domova, prechádzka bez domova, Trenčín, vnímavé prechádzky" />
+  <meta name="description" content="Prechádzka bez domova vás pozýva pozrieť sa na mesto z perspektívy človeka v krízovej situácii. Zažite Trenčín inak." />
+  <meta name="keywords" content="prechádzky bez domova, prechádzka bez domova, Trenčín, vnímavé prechádzky, bezdomovectvo" />
   <link rel="canonical" href="https://vnimave.sk/bez-domova.html" />
   <link rel="stylesheet" href="nav.css">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=DM+Sans:opsz,wght@9..40,200;9..40,300&display=swap" rel="stylesheet" />
@@ -50,6 +50,23 @@
       padding: 3.5rem 1.5rem;
     }
 
+    .breadcrumb {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      font-size: 0.85rem;
+      font-weight: 200;
+      opacity: 0.55;
+    }
+
+    .breadcrumb a {
+      color: var(--fg);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(240,237,230,0.3);
+    }
+
+    .breadcrumb a:hover { opacity: 0.8; }
+
     .sekcia-nadpis {
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
@@ -66,6 +83,8 @@
       color: var(--fg);
     }
 
+    .text-normal + .text-normal { margin-top: 1em; }
+
     .text-soft {
       font-weight: 200;
       font-size: var(--text);
@@ -74,11 +93,89 @@
       color: var(--fg);
     }
 
+    .zastávky {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .zastávka {
+      padding: 1.4rem 0;
+      border-top: 1px solid var(--fg-faint);
+    }
+
+    .zastávka:last-child { border-bottom: 1px solid var(--fg-faint); }
+
+    .zastávka-cislo {
+      font-size: 0.75rem;
+      font-weight: 200;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 0.4rem;
+    }
+
+    .zastávka-nazov {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1rem, 3.5vw, 1.1rem);
+      margin-bottom: 0.5rem;
+    }
+
+    .termin {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding: 1.2rem 0;
+      border-top: 1px solid var(--fg-faint);
+    }
+
+    .termin:last-child { border-bottom: 1px solid var(--fg-faint); }
+
+    .btn {
+      display: inline-block;
+      margin-top: 0.4rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: var(--text);
+      color: var(--fg);
+      border: 1px solid rgba(240,237,230,0.5);
+      padding: 0.4rem 1rem;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn:hover { background: rgba(240,237,230,0.1); border-color: var(--fg); }
+
     .mail {
       text-decoration: none;
       color: var(--fg);
       border-bottom: 1px solid rgba(240,237,230,0.5);
       padding-bottom: 1px;
+    }
+
+    .zoznam {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      padding: 0;
+    }
+
+    .zoznam li {
+      font-weight: 300;
+      font-size: var(--text);
+      line-height: 1.6;
+      color: var(--fg);
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .zoznam li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      opacity: 0.4;
     }
 
     @keyframes appear {
@@ -105,8 +202,28 @@
     <h1>Prechádzky<br>bez domova</h1>
   </div>
 
+  <div class="breadcrumb">
+    <a href="/">Domov</a> / Prechádzky bez domova
+  </div>
+
   <section>
-    <p class="text-normal">Text o Prechádzke bez domova bude čoskoro.</p>
+    <p class="text-normal">Zážitková prehliadka mesta, ktorá vás pozýva pozrieť sa na známe miesta z úplne inej perspektívy. Vyskúšate si, aké je ocitnúť sa v krízovej situácii – bez dokladov, peňazí a zázemia.</p>
+    <p class="text-normal">Cieľom nie je vyvolávať zhnusenie ani ľútosť. Chceme búrať mýty o bezdomovectve a zvyšovať vnímavosť voči ľuďom aj miestam, ktoré bežne prehliadame.</p>
+  </section>
+
+  <section>
+    <h2 class="sekcia-nadpis">Čo vás čaká</h2>
+    <ul class="zoznam">
+      <li>Modelová situácia – ocitáte sa v meste bez dokladov, peňazí a mobilu</li>
+      <li>Hľadáte jedlo, nocľah, pomoc – ako by ste to riešili?</li>
+      <li>Rôzne formy pomoci, hlinený dukát a kde sú hranice efektívnej pomoci</li>
+      <li>Návšteva nocľahárne a stretnutie s ľuďmi, ktorí v nej pracujú</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="sekcia-nadpis">Najbližšie termíny</h2>
+    <div id="zoznam"><p class="text-soft">Načítavam termíny...</p></div>
   </section>
 
   <script>
@@ -122,6 +239,58 @@
         menu.classList.remove('open');
       });
     });
+
+    const SHEET_ID = '1aN3vDM2wXE2JcnCTUgYs1JwXSEE29CM7W-ZmALNQsE0';
+    const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+
+    function formatDate(val) {
+      if (!val) return '';
+      const match = String(val).match(/Date\((\d+),(\d+),(\d+)/);
+      if (match) {
+        const d = new Date(+match[1], +match[2], +match[3]);
+        return d.toLocaleDateString('sk-SK', { day: 'numeric', month: 'long', year: 'numeric' });
+      }
+      return val;
+    }
+
+    function formatTime(val) {
+      if (!val) return '';
+      const match = String(val).match(/Date\(\d+,\d+,\d+,(\d+),(\d+)/);
+      if (match) {
+        const h = String(+match[1]).padStart(2, '0');
+        const m = String(+match[2]).padStart(2, '0');
+        return `${h}:${m}`;
+      }
+      return val;
+    }
+
+    fetch(URL)
+      .then(r => r.text())
+      .then(text => {
+        const json = JSON.parse(text.substring(47, text.length - 2));
+        const rows = json.table.rows;
+        const zoznam = document.getElementById('zoznam');
+        if (!rows || rows.length === 0) {
+          zoznam.innerHTML = '<p class="text-soft">Žiadne termíny</p>';
+          return;
+        }
+        zoznam.innerHTML = rows.map(row => {
+          const date = formatDate(row.c[0]?.v);
+          const time = formatTime(row.c[1]?.v);
+          const name = row.c[2]?.v || '';
+          const start = row.c[3]?.v || '';
+          const form = row.c[4]?.v || '';
+          return `
+            <div class="termin">
+              <div class="text-normal">${name}</div>
+              <div class="text-soft">${date}${time ? ', ' + time : ''}${start ? ' · ' + start : ''}</div>
+              ${form ? `<a class="btn" href="${form}" target="_blank">Registrovať</a>` : `<span class="text-soft">Registrácia čoskoro</span>`}
+            </div>`;
+        }).join('');
+      })
+      .catch(() => {
+        document.getElementById('zoznam').innerHTML = '<p class="text-soft">Termíny sa nepodarilo načítať.</p>';
+      });
   </script>
 
 </body>
